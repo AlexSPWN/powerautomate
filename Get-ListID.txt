@@ -1,0 +1,7 @@
+How to get ListID from trigger
+1. Compose QueryParam = split(uriQuery(triggerBody()?['{Link}']), '&')[1]
+2. Compose ListID = substring(
+	outputs('Compose_QueryParam'), 
+	add(indexOf(outputs('Compose_QueryParam'), '='), 1), 
+	sub(length(outputs('Compose_QueryParam')), add(indexOf(outputs('Compose_QueryParam'), '='), 1))
+)
