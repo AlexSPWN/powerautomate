@@ -1,0 +1,5 @@
+Create Date Field: FlowModified
+Settings in trigger
+@not(lessOrEquals(ticks(triggerBody()?['Modified']), ticks(addMinutes(triggerBody()?['FlowModified'], 2))))
+
+Update field FlowModified: utcNow()
