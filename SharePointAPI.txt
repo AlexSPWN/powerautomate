@@ -1,0 +1,36 @@
+Get All Versions of item
+https://<your_tenant>/sites/<site_name>/_api/web/lists/GetByTitle('<list_name>')/items(<item_id>)/versions
+
+Get list by ListID
+https://<your_tenant>/sites/<site_name>/_api/web/lists(guid'<list_guid>')/items(<item_id>)
+
+Remove Specific Permission
+_api/web/lists/getbytitle('<list_name>')/items(<item_id>)/roleassignments/removeroleassignment(principalid=<userId>,roleDefId=<permissionID>) 
+
+Get Permission ID
+_api/web/roledefinitions/getByName('Read')
+
+Data Queries & Pagination (Big Lists) - https://www.youtube.com/watch?v=aJBEMzRL7-o
+step 1. Initialize API Variable = string:  _api/Web/Lists/GetByTitle('<list_name>')/items?$top=5000
+step 2. Initialize HTTP Result = array: 
+step 3. Do until: API Variable = Complete
+  step 3.1 Send HTTP Request
+  Method: Get
+  Uri: API Variable
+  Headers: {
+    accept: application/json;odata=nometadata
+  }
+  step. 3.2 Append to array variable
+  {
+    name: HTTP Result
+    value: slice(string(body('Send_HTTP_Request')['value'], 1 -1)
+  }
+  step. 3.3 Set API Variable
+  {
+  name: API Variable
+  value: if(
+            equals(body('Send_HTTP_Request')?['odata.nextLink'], null),
+            'Complete',
+            substring(body('Send_HTTP_Request')?['odata.nextLink'], indexOf(body('Send_HTTP_Request')?['odata.nextLink'], '_'))
+          )
+  }
