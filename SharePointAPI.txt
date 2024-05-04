@@ -4,6 +4,9 @@ https://<your_tenant>/sites/<site_name>/_api/web/lists/GetByTitle('<list_name>')
 Get list by ListID
 https://<your_tenant>/sites/<site_name>/_api/web/lists(guid'<list_guid>')/items(<item_id>)
 
+Return Permission Inheritance
+https://<your_tenant>/sites/<site_name>/_api/web/lists(guid'<list_guid>')/items(<item_id>)/ResetRoleInheritance()
+
 Remove Specific Permission
 _api/web/lists/getbytitle('<list_name>')/items(<item_id>)/roleassignments/removeroleassignment(principalid=<userId>,roleDefId=<permissionID>) 
 
